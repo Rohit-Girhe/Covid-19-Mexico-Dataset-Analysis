@@ -1,0 +1,8 @@
+artifact_location: file:///D:/Covid-19-Mexico-Dataset-Analysis/Model/mlruns/934870600294126016
+creation_time: 1775850272785
+experiment_id: '934870600294126016'
+last_update_time: 1775850272785
+lifecycle_stage: active
+name: Covid_ANN_DIED_Prediction
+trace_location: null
+workspace: default
