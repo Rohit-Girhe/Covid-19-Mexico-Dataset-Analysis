@@ -8,3 +8,4 @@ jupyter
 flask
 gunicorn
 joblib
+mlflow
