@@ -126,7 +126,7 @@ async def home(request: Request) -> HTMLResponse:
         "feature_columns": metadata.get("feature_columns", []),
         "medical_units": list(range(1, 14)),
     }
-    return templates.TemplateResponse("index.html", context)
+    return templates.TemplateResponse(request=request, name="index.html", context=context)
 
 
 @app.get("/api/health")

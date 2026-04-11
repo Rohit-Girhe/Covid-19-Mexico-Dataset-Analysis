@@ -215,6 +215,15 @@ h1 {
     transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
 }
 
+.field select {
+    color-scheme: dark;
+}
+
+.field select option {
+    color: #08121c;
+    background: #f3f7fb;
+}
+
 .field input:focus,
 .field select:focus {
     border-color: rgba(88, 214, 163, 0.8);
