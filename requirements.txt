@@ -6,6 +6,9 @@ scikit-learn
 tensorflow
 jupyter
 flask
+fastapi
+uvicorn[standard]
+jinja2
 gunicorn
 joblib
 mlflow

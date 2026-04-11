@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/Covid-19-Mexico-Dataset-Analysis/Model/mlruns/934870600294126016/d13ae42f5d314aadbc94739bd73304a6/artifacts
+end_time: 1775895401485
+entry_point_name: ''
+experiment_id: '934870600294126016'
+lifecycle_stage: active
+run_id: d13ae42f5d314aadbc94739bd73304a6
+run_name: ann_baseline_class_weighted
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775895157366
+status: 3
+tags: []
+user_id: rohit

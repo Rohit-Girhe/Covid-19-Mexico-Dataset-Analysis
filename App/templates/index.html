@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Mortality Risk Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="ambient ambient-one"></div>
+        <div class="ambient ambient-two"></div>
+
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">ANN Deployment</p>
+                <h1>COVID-19 Mortality Risk Predictor</h1>
+                <p class="hero-text">
+                    Interactive FastAPI deployment for your capstone ANN. Enter patient and clinical details
+                    to estimate mortality risk using the trained model from this project.
+                </p>
+
+                <div class="metrics-grid">
+                    <article class="metric-card">
+                        <span class="metric-label">Test Recall</span>
+                        <strong>{{ '%.2f%%'|format(test_metrics.get('test_recall', 0) * 100) }}</strong>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">Test ROC-AUC</span>
+                        <strong>{{ '%.4f'|format(test_metrics.get('test_roc_auc', 0)) }}</strong>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">Decision Threshold</span>
+                        <strong>{{ '%.2f'|format(threshold) }}</strong>
+                    </article>
+                </div>
+            </div>
+
+            <aside class="hero-panel">
+                <p class="panel-kicker">Model Focus</p>
+                <h2>High recall, clinically aware screening</h2>
+                <p>
+                    This interface is tuned for mortality-risk screening, so it favors catching high-risk cases.
+                    Use predictions as model guidance, not as a standalone medical decision.
+                </p>
+            </aside>
+        </header>
+
+        <main class="workspace">
+            <section class="form-panel glass">
+                <div class="section-head">
+                    <div>
+                        <p class="section-kicker">Patient Inputs</p>
+                        <h2>Enter Case Details</h2>
+                    </div>
+                    <button id="fill-sample" class="ghost-button" type="button">Load Sample</button>
+                </div>
+
+                <p class="hero-text">
+                    Enter values using the same cleaned encoding used during training. Binary fields should match the
+                    `0/1` representation from your model-building notebook.
+                </p>
+
+                <form id="prediction-form" class="prediction-form">
+                    <div class="input-grid">
+                        <label class="field">
+                            <span>Age</span>
+                            <input id="AGE" name="AGE" type="number" min="0" max="121" step="1" value="45" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Medical Unit</span>
+                            <select id="MEDICAL_UNIT" name="MEDICAL_UNIT" required>
+                                {% for unit in medical_units %}
+                                <option value="{{ unit }}">{{ unit }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>USMER</span>
+                            <select id="USMER" name="USMER" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Sex</span>
+                            <select id="SEX" name="SEX" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Patient Type</span>
+                            <select id="PATIENT_TYPE" name="PATIENT_TYPE" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Pneumonia</span>
+                            <select id="PNEUMONIA" name="PNEUMONIA" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Diabetes</span>
+                            <select id="DIABETES" name="DIABETES" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>COPD</span>
+                            <select id="COPD" name="COPD" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Asthma</span>
+                            <select id="ASTHMA" name="ASTHMA" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Immunosuppression</span>
+                            <select id="INMSUPR" name="INMSUPR" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Hypertension</span>
+                            <select id="HIPERTENSION" name="HIPERTENSION" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Other Disease</span>
+                            <select id="OTHER_DISEASE" name="OTHER_DISEASE" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Cardiovascular</span>
+                            <select id="CARDIOVASCULAR" name="CARDIOVASCULAR" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Obesity</span>
+                            <select id="OBESITY" name="OBESITY" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Renal Chronic</span>
+                            <select id="RENAL_CHRONIC" name="RENAL_CHRONIC" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Tobacco</span>
+                            <select id="TOBACCO" name="TOBACCO" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="submit-button" class="primary-button" type="submit">Predict Risk</button>
+                        <button id="reset-button" class="secondary-button" type="reset">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="result-panel glass">
+                <div class="section-head">
+                    <div>
+                        <p class="section-kicker">Prediction Output</p>
+                        <h2>Risk Signal</h2>
+                    </div>
+                    <span id="status-badge" class="status-badge idle">Waiting for input</span>
+                </div>
+
+                <div class="probability-shell">
+                    <div id="probability-ring" class="probability-ring">
+                        <div class="probability-core">
+                            <span id="probability-value">--</span>
+                            <small>risk score</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-copy">
+                    <h3 id="risk-label">No prediction yet</h3>
+                    <p id="risk-description">
+                        Submit patient details to generate a mortality-risk estimate from the trained ANN model.
+                    </p>
+                </div>
+
+                <div class="meter-block">
+                    <div class="meter-scale">
+                        <span>Lower</span>
+                        <span>Threshold {{ '%.2f'|format(threshold) }}</span>
+                        <span>Higher</span>
+                    </div>
+                    <div class="meter-track">
+                        <div id="meter-fill" class="meter-fill"></div>
+                        <div class="meter-threshold" style="left: {{ threshold * 100 }}%;"></div>
+                    </div>
+                </div>
+
+                <div class="details-grid">
+                    <article class="detail-card">
+                        <span class="detail-label">Predicted Class</span>
+                        <strong id="predicted-class">--</strong>
+                    </article>
+                    <article class="detail-card">
+                        <span class="detail-label">Threshold</span>
+                        <strong>{{ '%.2f'|format(threshold) }}</strong>
+                    </article>
+                    <article class="detail-card">
+                        <span class="detail-label">Model Version</span>
+                        <strong id="model-version">1.0.0</strong>
+                    </article>
+                </div>
+
+                <p id="error-message" class="error-message" hidden></p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.APP_CONFIG = {
+            threshold: {{ threshold|tojson }}
+        };
+    </script>
+    <script src="{{ url_for('static', path='/app.js') }}" defer></script>
+</body>
+</html>
