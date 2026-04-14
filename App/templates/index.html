@@ -57,8 +57,8 @@
                 </div>
 
                 <p class="hero-text">
-                    Enter values using the same cleaned encoding used during training. Binary fields should match the
-                    `0/1` representation from your model-building notebook.
+                    The interface shows human-readable clinical labels, while the underlying submitted values still map
+                    correctly to the encoded inputs used during model training.
                 </p>
 
                 <form id="prediction-form" class="prediction-form">
@@ -72,7 +72,7 @@
                             <span>Medical Unit</span>
                             <select id="MEDICAL_UNIT" name="MEDICAL_UNIT" required>
                                 {% for unit in medical_units %}
-                                <option value="{{ unit }}">{{ unit }}</option>
+                                <option value="{{ unit }}">Unit {{ unit }}</option>
                                 {% endfor %}
                             </select>
                         </label>
@@ -80,112 +80,112 @@
                         <label class="field">
                             <span>USMER</span>
                             <select id="USMER" name="USMER" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Sex</span>
                             <select id="SEX" name="SEX" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Patient Type</span>
                             <select id="PATIENT_TYPE" name="PATIENT_TYPE" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">Hospitalized</option>
+                                <option value="1">Outpatient</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Pneumonia</span>
                             <select id="PNEUMONIA" name="PNEUMONIA" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Diabetes</span>
                             <select id="DIABETES" name="DIABETES" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>COPD</span>
                             <select id="COPD" name="COPD" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Asthma</span>
                             <select id="ASTHMA" name="ASTHMA" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Immunosuppression</span>
                             <select id="INMSUPR" name="INMSUPR" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Hypertension</span>
                             <select id="HIPERTENSION" name="HIPERTENSION" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Other Disease</span>
                             <select id="OTHER_DISEASE" name="OTHER_DISEASE" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Cardiovascular</span>
                             <select id="CARDIOVASCULAR" name="CARDIOVASCULAR" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Obesity</span>
                             <select id="OBESITY" name="OBESITY" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Renal Chronic</span>
                             <select id="RENAL_CHRONIC" name="RENAL_CHRONIC" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
 
                         <label class="field">
                             <span>Tobacco</span>
                             <select id="TOBACCO" name="TOBACCO" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                         </label>
                     </div>
