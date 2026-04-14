@@ -235,12 +235,6 @@ The project stores:
 - The current deployment uses `tensorflow-cpu` for cleaner CPU-based container execution.
 - This project should be treated as a machine learning prototype for educational and screening use, not as a production clinical system without external validation.
 
-## Future Improvements
-
-- threshold tuning for precision-recall tradeoff
-- model comparison with tree-based methods such as XGBoost or LightGBM
-- explainability support using SHAP
-- authentication, logging, and monitoring for production deployment
 
 ## Author
 
